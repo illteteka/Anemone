@@ -15,8 +15,9 @@ end
 
 function polygon.toggleLayer(tbl, layer, visible)
 
-	if tbl[layer] ~= nil then
-		tbl[layer].visible = visible
+	local this_model = polygon.data[tbl]
+	if this_model[layer] ~= nil then
+		this_model[layer].visible = visible
 	else
 		print("Error: vector does not contain a shape at layer " .. layer)
 	end
