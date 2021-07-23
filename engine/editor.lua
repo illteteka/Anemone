@@ -122,8 +122,8 @@ function editor.updateMouse(dt)
 
 			else
 			
-				this_obj.x = mouse.rx - ww
-				this_obj.y = mouse.ry - hh
+				this_obj.x = math.floor(mouse.rx - ww)
+				this_obj.y = math.floor(mouse.ry - hh)
 			
 			end
 		
