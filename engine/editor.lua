@@ -541,10 +541,6 @@ function editor.updateScroll(dt)
 
 	if mouse.wheel ~= 0 then
 
-		if z_key == _ON then
-			editor.updateZoom(dt)
-		end
-
 		local mode_switch = editor.current_object
 		local mode_list = editor.modes[editor.current_mode].objects
 
@@ -586,6 +582,10 @@ function editor.updateScroll(dt)
 			editor.current_level = mode_switch
 			instances.clear()
 			instances.list = editor.levels[editor.current_level]
+
+		elseif z_key == _ON then
+			
+			editor.updateZoom(dt)
 
 		else -- Change object
 			
