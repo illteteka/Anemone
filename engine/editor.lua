@@ -539,6 +539,11 @@ end
 
 function editor.updateScroll(dt)
 
+	local this_os = love.system.getOS()
+	if this_os == "OS X" then
+		dt = dt/4
+	end
+
 	if mouse.wheel ~= 0 then
 
 		local mode_switch = editor.current_object
