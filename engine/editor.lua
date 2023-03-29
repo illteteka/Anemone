@@ -6,7 +6,7 @@ local editor = {}
 function editor.load()
 
 	window.color = {6/255,13/255,69/255,1}
-	smallfont = love.graphics.newFont("font.ttf", 9)
+	smallfont = love.graphics.newFont("font.ttf", 14)
 
 	-- Import editor icons
 	edit_move  = polygon.new("soda/editor/edit_move.soda")
@@ -24,7 +24,7 @@ function editor.load()
 	editor.addTool("PRINT", edit_print)
 
 	editor.toolbar.x = 16
-	editor.toolbar.y = 80
+	editor.toolbar.y = font_size * 7
 	editor.toolbar.btn_size = 24
 	editor.toolbar.w = editor.toolbar.btn_size * 2
 	editor.toolbar.h = math.ceil(#editor.toolbar / 2) * editor.toolbar.btn_size
@@ -392,10 +392,10 @@ function editor.drawUI()
 	local data_ed = editor.modes[editor.current_mode].name .. " " .. editor.modes[editor.current_mode].objects[editor.current_object]
 
 	lg.print("camera: "   .. data_camera, 0, 0)
-	lg.print("mouse: "    .. data_mouse,  0, 11)
-	lg.print("grid: "     .. data_grid,   0, 22)
-	lg.print("editor: "   .. data_ed,     0, 33)
-	lg.print("zoom: "     .. data_zoom,   0, 44)
+	lg.print("mouse: "    .. data_mouse,  0, font_size)
+	lg.print("grid: "     .. data_grid,   0, font_size * 2)
+	lg.print("editor: "   .. data_ed,     0, font_size * 3)
+	lg.print("zoom: "     .. data_zoom,   0, font_size * 4)
 
 	editor.drawToolbar()
 

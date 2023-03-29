@@ -7,16 +7,18 @@ dev = require "engine.dev"
 ui = require "engine.ui"
 instances = require "instances"
 editor = require "engine.editor"
+keyboard = require "engine.keyboard"
 require "engine.utils"
 
 lg = love.graphics
 lk = love.keyboard
+font_size = 14
 
 LEVEL_TEST_1 = 0
 LEVEL_TEST_2 = 1
 LEVEL_EDITOR = 2
 
-LEVEL_SWITCH = LEVEL_EDITOR
+LEVEL_SWITCH = LEVEL_TEST_1
 
 function love.load()
 
@@ -29,7 +31,7 @@ function love.load()
 	
 	-- Init window
 	window.init()
-	love.window.setTitle("anemone v1")
+	love.window.setTitle("anemone v2")
 
 	ui.init()
 
@@ -37,7 +39,7 @@ function love.load()
 	shader_mask = lg.newShader("shaders/mask.frag")
 	
 	-- Loading models
-	font = love.graphics.newFont("font.ttf", 18)
+	font = love.graphics.newFont("font.ttf", font_size)
 	love.graphics.setFont(font)
 	
 	test_level = polygon.new("soda/test-level.soda")
@@ -74,6 +76,7 @@ function love.update(dt)
 	input.update(dt)
 	ctrl.update(dt)
 	ui.update(dt)
+	keyboard.update(dt)
 	
 	window.updateFullscreen()
 

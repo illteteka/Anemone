@@ -34,11 +34,17 @@ function test_one.init()
 	LEVEL_SWITCH = LEVEL_TEST_1
 	instances.clear()
 	test_one.level()
+
+	keyboard.clear()
+	
+	test_kb = keyboard.newBox(100, 100, 20 * font_size, font_size + 5, 32, "default")
+	pw = keyboard.newBox(100, 122, 20 * font_size, font_size + 5, 32, "password", "Password:", 0, "apple123")
+	test_kb2 = keyboard.newBox(100, 144, 20 * font_size, font_size + 5, 32, "default", "", 0, "this is a testbox")
 end
 
 function test_one.update(dt)
 
-	if r_key == _PRESS then
+	if f1_key == _PRESS then
 		level_test_two.init()
 	end
 
@@ -50,6 +56,8 @@ function test_one.draw()
 	
 	obj_guy.draw()
 	obj_blueguy.draw()
+
+	keyboard.draw()
 
 end
 

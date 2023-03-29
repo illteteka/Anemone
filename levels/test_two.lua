@@ -14,7 +14,7 @@ end
 
 function test_two.update(dt)
 
-	if r_key == _PRESS then
+	if f1_key == _PRESS then
 		level_test_one.init()
 	end
 

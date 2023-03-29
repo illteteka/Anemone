@@ -14,9 +14,11 @@ ralt_key = _OFF
 enter_key = _OFF
 space_key = _OFF
 lshift_key = _OFF
+rshift_key = _OFF
 
 r_key = _OFF
 z_key = _OFF
+y_key = _OFF
 
 up_key = _OFF
 down_key = _OFF
@@ -29,6 +31,7 @@ a_key = _OFF
 d_key = _OFF
 
 escape_key = _OFF
+f1_key = _OFF
 f3_key = _OFF
 f4_key = _OFF
 
@@ -37,6 +40,8 @@ plus_key = _OFF
 grave_key = _OFF
 
 mouse_switch = _OFF
+rmb_switch = _OFF
+middle_switch = _OFF
 
 function input.combo(a, b)
 	return (a == _ON and b == _PRESS) or (a == _PRESS and b == _ON) or (a == _PRESS and b == _PRESS)
@@ -92,15 +97,20 @@ function input.update(dt)
 	end
 
 	mouse_switch = input.pullSwitch(love.mouse.isDown(1), mouse_switch)
+	rmb_switch = input.pullSwitch(love.mouse.isDown(2), rmb_switch)
+	middle_switch = input.pullSwitch(love.mouse.isDown(3), middle_switch)
 	
 	r_key = input.pullSwitch(love.keyboard.isDown("r"), r_key)
 	z_key = input.pullSwitch(love.keyboard.isDown("z"), z_key)
+	y_key = input.pullSwitch(love.keyboard.isDown("y"), y_key)
 	lshift_key = input.pullSwitch(love.keyboard.isDown("lshift"), lshift_key)
+	rshift_key = input.pullSwitch(love.keyboard.isDown("rshift"), rshift_key)
 	lalt_key = input.pullSwitch(love.keyboard.isDown("lalt"), lalt_key)
 	ralt_key = input.pullSwitch(love.keyboard.isDown("ralt"), ralt_key)
 	enter_key = input.pullSwitch(love.keyboard.isDown("return"), enter_key)
 	space_key = input.pullSwitch(love.keyboard.isDown("space"), space_key)
 	escape_key = input.pullSwitch(love.keyboard.isDown("escape"), escape_key)
+	f1_key = input.pullSwitch(love.keyboard.isDown("f1"), f1_key)
 	f3_key = input.pullSwitch(love.keyboard.isDown("f3"), f3_key)
 	f4_key = input.pullSwitch(love.keyboard.isDown("f4"), f4_key)
 	
