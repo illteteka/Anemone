@@ -9,6 +9,9 @@ keyboard.cursor_flip = true
 keyboard.cursor_end = 0
 keyboard.selection = false
 
+rainbow = c_white
+rainbow_timer = 0
+
 --[[
 	keyboard.newBox - make a new textbox
 	x - x position of the textbox
@@ -69,6 +72,7 @@ function keyboard.draw()
 
 	local gc = 0.5
 	local grey = {gc, gc, gc, 1}
+	local lightblue = {0.5, 0.5, 0.9, 1}
 
 	local i = 1
 	while i <= #keyboard.box do
@@ -90,8 +94,7 @@ function keyboard.draw()
 
 			local active_color = c_white
 			if is_active then
-				-- TODO
-				-- active_color = rainbow
+				active_color = rainbow
 			end
 			lg.setColor(active_color)
 			lg.rectangle("fill",x, y, w, h)
@@ -140,41 +143,34 @@ function keyboard.draw()
 						last = keyboard.cursor_end
 					end
 
-					-- TODO fix
-					--left = text.slice(0,first)
-					--middle = text.slice(first,last)
-					--end_str = text.slice(last,text.length)
+					left = text:sub(0, first)
+					middle = text:sub(first, last)
+					end_str = text:sub(last, text:len())
 
 					lg.setColor(c_white)
 					lg.print(left, x + 5, y + 2)
 
-					--[[
-					if (middle !== "")
-					{
-						gfx.setColor("lightblue");
-						gfx.rectangle(x + 6 + gfx.getTextWidth(left), y + 3, gfx.getTextWidth(middle), 21)
-						gfx.setColor("black");
-						gfx.print(middle, x + 5 + gfx.getTextWidth(left), y + 4 + fontSize);
-						gfx.setColor("white");
-						gfx.print(end, x + 5 + gfx.getTextWidth(left) + gfx.getTextWidth(middle), y + 4 + fontSize);
-					}
-					]]
+					if middle ~= "" then
+						lg.setColor(lightblue)
+						lg.rectangle("fill", x + 6 + font:getWidth(left), y + 3, font:getWidth(middle), 21)
+						lg.setColor(c_black)
+						lg.print(middle, x + 5 + font:getWidth(left), y + 2)
+						lg.setColor(c_white)
+						lg.print(end_str, x + 5 + font:getWidth(left) + font:getWidth(middle), y + 2)
+					end
 
 				end
 
 			end
 
 			-- Draw cursor at the end of the textbox
-			--[[
-			if (keyboard.isActive(id) && keyboard.cursorFlip)
-			{
-				let left = text.slice(0,keyboard.cursor);
-				gfx.setColor("white");
-				let ox = x + gfx.getTextWidth(left);
-				let oy = y + 3
-				gfx.rectangle(ox + 6, oy, 2, 21)
-			}
-			]]
+			if keyboard.isActive(id) and keyboard.cursor_flip then
+				local left = text:sub(0,keyboard.cursor)
+				lg.setColor("white")
+				local ox = x + font:getWidth(left)
+				local oy = y + 3
+				lg.rectangle("fill", ox + 6, oy, 2, 21)
+			end
 
 		end
 
@@ -184,6 +180,13 @@ function keyboard.draw()
 end
 
 function keyboard.update(dt)
+
+	-- Update rainbow
+	rainbow_timer = rainbow_timer + dt * 60
+	if (rainbow_timer > 255) then
+		rainbow_timer = rainbow_timer - 255
+	end
+	rainbow = hsl(rainbow_timer, 255, 128, 1)
 
 end
 
