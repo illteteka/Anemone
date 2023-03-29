@@ -539,11 +539,12 @@ end
 
 function editor.updateScroll(dt)
 
-	if mouse.wheel ~= 0 then
+	local this_os = love.system.getOS()
+	if this_os == "OS X" then
+		dt = dt/4
+	end
 
-		if z_key == _ON then
-			editor.updateZoom(dt)
-		end
+	if mouse.wheel ~= 0 then
 
 		local mode_switch = editor.current_object
 		local mode_list = editor.modes[editor.current_mode].objects
@@ -586,6 +587,10 @@ function editor.updateScroll(dt)
 			editor.current_level = mode_switch
 			instances.clear()
 			instances.list = editor.levels[editor.current_level]
+
+		elseif z_key == _ON then
+			
+			editor.updateZoom(dt)
 
 		else -- Change object
 			
